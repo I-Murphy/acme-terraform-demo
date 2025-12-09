@@ -15,7 +15,7 @@ terraform {
     organization = "YOUR_ORG_NAME"
 
     workspaces {
-      name = "aws-demo"
+      name = "acme-terraform-demo"
     }
   }
 }
@@ -24,14 +24,7 @@ provider "aws" {
   region = var.aws_region
 }
 
-resource "random_pet" "suffix" {
-  length = 2
-}
-
-resource "aws_s3_bucket" "demo" {
-  bucket = "acme-demo-bucket-${random_pet.suffix.id}"
-
-  tags = {
-    Name = "acme-demo-bucket"
-  }
+module "storage" {
+  source = "./modules/storage"
+  prefix = var.bucket_prefix
 }
