@@ -1,3 +1,7 @@
 output "bucket_name" {
-  value = aws_s3_bucket.demo.bucket
+  value = module.storage.bucket_name
+}
+
+output "bucket_arn" {
+  value = module.storage.bucket_arn
 }
