@@ -8,11 +8,8 @@ resource "random_id" "bucket_suffix" {
 
 resource "aws_s3_bucket" "this" {
   bucket = "${var.prefix}-${random_id.bucket_suffix.hex}"
-}
 
   tags = {
-    Name        = "${var.prefix}-bucket"
-    Environment = "demo"
-    ManagedBy   = "Terraform Cloud"
+    Name = "acme-demo"
   }
 }
