@@ -28,3 +28,11 @@ module "storage" {
   source = "./modules/storage"
   prefix = var.bucket_prefix
 }
+
+resource "random_id" "bucket_suffix" {
+  byte_length = 4
+
+  keepers = {
+    run_id = timestamp()
+  }
+}
