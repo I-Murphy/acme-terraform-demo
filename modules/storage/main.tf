@@ -1,9 +1,14 @@
-resource "random_pet" "suffix" {
-  length = 2
+resource "random_id" "bucket_suffix" {
+  byte_length = 4
+
+  keepers = {
+    run_id = timestamp()
+  }
 }
 
-resource "aws_s3_bucket" "bucket" {
-  bucket = "${var.prefix}-${random_pet.suffix.id}"
+resource "aws_s3_bucket" "this" {
+  bucket = "${var.prefix}-${random_id.bucket_suffix.hex}"
+}
 
   tags = {
     Name        = "${var.prefix}-bucket"
